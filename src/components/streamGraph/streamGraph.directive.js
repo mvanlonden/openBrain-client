@@ -4,7 +4,7 @@ angular.module('openBrain')
   .directive('streamChart', function($parse, $window, socket){
    return{
       restrict:'EA',
-      template:"<svg width='850' height='200'></svg>",
+      template:"<svg></svg>",
        link: function(scope, elem, attrs){
            
           var d3 = $window.d3;
@@ -13,7 +13,7 @@ angular.module('openBrain')
               dataB = d3.range(n).map(function(){return 0;});
 
           var margin = {top: 20, right: 20, bottom: 20, left: 40},
-              width = 960 - margin.left - margin.right,
+              width = elem[0].offsetWidth - margin.left - margin.right,
               height = 500 - margin.top - margin.bottom;
 
           var x = d3.scale.linear()
