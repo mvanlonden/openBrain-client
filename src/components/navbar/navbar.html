@@ -1,0 +1,14 @@
+<md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
+  <md-toolbar class="md-theme-indigo">
+    <h1 class="md-toolbar-tools">Open Brain</h1>
+  </md-toolbar>
+  <md-content ng-controller="NavbarCtrl">
+    <md-button ng-click="close()" class="md-primary" hide-gt-md>
+      Close
+    </md-button>
+    <ul class="docs-menu">
+      <li><md-button>Record</md-button></li>
+      <li><md-button>Analyze</md-button></li>
+    </ul>
+  </md-content>
+</md-sidenav>

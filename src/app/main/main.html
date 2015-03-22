@@ -1,0 +1,17 @@
+<section layout="row" flex>
+  <header ng-include="'components/navbar/navbar.html'"></header>
+  <md-content flex>
+    <md-toolbar>
+      <h2 class="md-toolbar-tools">
+        <md-button ng-click="toggleNav()" hide-gt-md="" aria-label="Toggle Menu">
+          <md-icon md-svg-src="assets/images/icons/ic_menu_24px.svg" class="ng-isolate-scope md-default-theme" aria-hidden="true">
+          </md-icon>
+        </md-button>
+        <span>Toolbar</span>
+      </h2>
+    </md-toolbar>
+    <section class="jumbotron">
+      <div ng-include="'components/streamGraph/streamGraph.html'"></div>
+    </section>
+  </md-content>
+</section>
