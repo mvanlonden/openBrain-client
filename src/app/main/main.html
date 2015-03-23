@@ -7,7 +7,7 @@
           <md-icon md-svg-src="assets/images/icons/ic_menu_24px.svg" class="ng-isolate-scope md-default-theme" aria-hidden="true">
           </md-icon>
         </md-button>
-        <span>Toolbar</span>
+        <span>Record</span>
       </h2>
     </md-toolbar>
     <section class="jumbotron" style="margin-top: 64px;">
@@ -18,10 +18,11 @@
         <md-card-content>
           <h2>Board</h2>
           <h5>Stream</h5>
-          <md-switch ng-model="board.stream" aria-label="Stream">
+          <md-switch ng-model="board.stream" ng-init="board.stream=true" ng-change="toggleStreaming(board.stream)" aria-label="Stream">
           </md-switch>
           <h5>Simulated</h5>
-          <md-switch ng-model="board.simulated" aria-label="Simulated">
+          <md-switch ng-disabled="true" ng-model="board.simulated" ng-change="toggleSimulated(board.simulated)" aria-label="Simulated">
+            Not yet available on client-side
           </md-switch>
         </md-card-content>
       </md-card>
@@ -29,16 +30,16 @@
         <md-card-content>
           <h2>Output</h2>
           <div layout="column">
-            <md-checkbox ng-disabled="true" ng-model="output.socket" aria-label="Socket" ng-init="output.socket=true">
+            <md-checkbox md-no-ink ng-disabled="true" ng-model="output.socket" aria-label="Socket" ng-init="output.socket=true">
               Socket
             </md-checkbox>
-            <md-checkbox ng-model="output.osc" aria-label="OSC">
+            <md-checkbox md-no-ink ng-model="output.osc" aria-label="OSC">
               OSC
             </md-checkbox>
-            <md-checkbox ng-model="output.udp" aria-label="UDP">
+            <md-checkbox md-no-ink ng-model="output.udp" aria-label="UDP">
               UDP
             </md-checkbox>
-            <md-checkbox ng-model="output.csv" aria-label="CSV">
+            <md-checkbox md-no-ink ng-model="output.csv" aria-label="CSV">
               CSV
             </md-checkbox>
           </div>
@@ -48,33 +49,35 @@
         <md-card-content flex>
           <h2>Channels</h2>
           <div layout="column">
-            <md-checkbox ng-model="channel.A" aria-label="Channel 1" ng-init="channel.A=true">
+            <md-checkbox md-no-ink ng-model="channel.A" aria-label="Channel 1" ng-init="channel.A=true">
               A
             </md-checkbox>
-            <md-checkbox ng-model="channel.B" aria-label="Channel 2" ng-init="channel.B=true">
+            <md-checkbox md-no-ink ng-model="channel.B" aria-label="Channel 2" ng-init="channel.B=true">
               B
             </md-checkbox>
-            <md-checkbox ng-model="channel.C" aria-label="Channel 3" ng-init="channel.C=true">
+            <md-checkbox md-no-ink ng-model="channel.C" aria-label="Channel 3" ng-init="channel.C=true">
               C
             </md-checkbox>
-            <md-checkbox ng-model="channel.D" aria-label="Channel 4" ng-init="channel.D=true">
+            <md-checkbox md-no-ink ng-model="channel.D" aria-label="Channel 4" ng-init="channel.D=true">
               D
             </md-checkbox>
-            <md-checkbox ng-model="channel.E" aria-label="Channel 5" ng-init="channel.E=true">
+            <md-checkbox md-no-ink ng-model="channel.E" aria-label="Channel 5" ng-init="channel.E=true">
               E
             </md-checkbox>
-            <md-checkbox ng-model="channel.F" aria-label="Channel 6" ng-init="channel.F=true">
+            <md-checkbox md-no-ink ng-model="channel.F" aria-label="Channel 6" ng-init="channel.F=true">
               F
             </md-checkbox>
-            <md-checkbox ng-model="channel.G" aria-label="Channel 7" ng-init="channel.G=true">
+            <md-checkbox md-no-ink ng-model="channel.G" aria-label="Channel 7" ng-init="channel.G=true">
               G
             </md-checkbox>
-            <md-checkbox ng-model="channel.H" aria-label="Channel 8" ng-init="channel.H=true">
+            <md-checkbox md-no-ink ng-model="channel.H" aria-label="Channel 8" ng-init="channel.H=true">
               H
             </md-checkbox>
           </div>
         </md-card-content>
       </md-card>
+      
+
     </section>
   </md-content>
 </section>

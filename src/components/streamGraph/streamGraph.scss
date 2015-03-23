@@ -11,8 +11,29 @@ svg {
   stroke: #000;
   stroke-width: 1.5px;
 
-  &#b {
-    stroke: #fff;
+  &#path1 {
+    stroke: #FF0000;
+  }
+  &#path2 {
+    stroke: #FFFF00;
+  }
+  &#path3 {
+    stroke: #00FF00;
+  }
+  &#path4 {
+    stroke: #00FFFF;
+  }
+  &#path5 {
+    stroke: #0000FF;
+  }
+  &#path6 {
+    stroke: #FF00FF;
+  }
+  &#path7 {
+    stroke: #7BCDC8;
+  }
+  &#path8 {
+    stroke: #F49AC2;
   }
 
 }

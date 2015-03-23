@@ -8,13 +8,11 @@ angular.module('openBrain')
        link: function(scope, elem, attrs){
            
           var d3 = $window.d3;
-          var n = 400,
-              data = d3.range(n).map(function(){return 0;}),
-              dataB = d3.range(n).map(function(){return 0;});
+          var n = 400;
 
           var margin = {top: 20, right: 20, bottom: 20, left: 40},
               width = elem[0].offsetWidth - margin.left - margin.right,
-              height = 500 - margin.top - margin.bottom;
+              height = elem[0].offsetHeight - margin.top - margin.bottom;
 
           var x = d3.scale.linear()
               .domain([1, n - 2])
@@ -30,7 +28,6 @@ angular.module('openBrain')
               .y(function(d, i) { return y(d); });
 
           var rawSvg = elem.find("svg")[0];
-          console.log(rawSvg);
           var svg = d3.select(rawSvg)
               .attr("width", width + margin.left + margin.right)
               .attr("height", height + margin.top + margin.bottom)
@@ -53,20 +50,24 @@ angular.module('openBrain')
               .attr("class", "y axis")
               .call(y.axis = d3.svg.axis().scale(y).orient("left"));
 
-          var pathA = svg.append("g")
-              .attr("clip-path", "url(#clip)")
-            .append("path")
-              .datum(data)
-              .attr("class", "line")
-              .attr("d", line);
+          var paths = [];
+          var datas = [];
 
-          var pathB = svg.append("g")
-              .attr("clip-path", "url(#clip)")
-            .append("path")
-              .datum(dataB)
-              .attr("class", "line")
-              .attr("id", "b")
-              .attr("d", line);
+          for (var i = 0; i < 8; i++) {
+            var data = d3.range(n).map(function(){return 0;});
+            datas.push(data);
+            var path = svg.append("g")
+                .attr("clip-path", "url(#clip)")
+              .append("path")
+                .datum(data)
+                .attr("class", "line")
+                .attr("id", 'path' + (i + 1))
+                .attr("d", line);
+            console.log(i);
+            paths.push(path);
+                  console.log(paths);
+
+          }
 
           var transition = d3.select({}).transition()
             .ease("linear");
@@ -76,34 +77,43 @@ angular.module('openBrain')
           var count = 0;
           
           socket.on('stream', function (stream){
+              // console.log('message');
               //Receiving Data
               count++
 
               // for (var i = 0; i < numPlots; i++) {
                 // push a new data point onto the back
                 if (count % 5 === 0) {
-                  data.push(stream.data[0]);
-                  dataB.push(stream.data[1]);
-                  y.domain([Math.min(d3.min(data), d3.min(dataB)), Math.max(d3.max(data), d3.max(dataB))]);
+                  var min;
+                  var max;
+
+                  for (var i = 0; i < paths.length; i++) {
+                    datas[i].push(stream.data[i]);
+                    // redraw the line, and slide it to the left
+                    paths[i]
+                        .attr("d", line)
+                      //   .attr("transform", null)
+                      // .transition()
+                      //   .ease("linear")
+                        .attr("transform", "translate(" + x(0) + ",0)");
+
+                    // pop the old data point off the front
+                    datas[i].shift();
+
+                    if (d3.min(datas[i]) < min || !min) {
+                      min = d3.min(datas[i]);
+                    }
+
+                    if (d3.max(datas[i]) > max || !max) {
+                      max = d3.max(datas[i]);
+                    }
+
+                  }
+
+                  y.domain([min, max]);
 
                   axis.call(y.axis);
-                  // redraw the line, and slide it to the left
-                  pathA
-                      .attr("d", line)
-                      .attr("transform", null)
-                    .transition()
-                      .ease("linear")
-                      .attr("transform", "translate(" + x(0) + ",0)");
-                  pathB
-                      .attr("d", line)
-                      .attr("transform", null)
-                    .transition()
-                      .ease("linear")
-                      .attr("transform", "translate(" + x(0) + ",0)");
 
-                  // pop the old data point off the front
-                  data.shift();
-                  dataB.shift();
                   
                 }
 
