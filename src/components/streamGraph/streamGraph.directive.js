@@ -63,9 +63,7 @@ angular.module('openBrain')
                 .attr("class", "line")
                 .attr("id", 'path' + (i + 1))
                 .attr("d", line);
-            console.log(i);
             paths.push(path);
-                  console.log(paths);
 
           }
 
@@ -82,43 +80,39 @@ angular.module('openBrain')
               count++
 
               // for (var i = 0; i < numPlots; i++) {
-                // push a new data point onto the back
-                if (count % 5 === 0) {
-                  var min;
-                  var max;
+              // push a new data point onto the back
+              if (count % 5 === 0) {
+                var min;
+                var max;
 
-                  for (var i = 0; i < paths.length; i++) {
-                    datas[i].push(stream.data[i]);
-                    // redraw the line, and slide it to the left
-                    paths[i]
-                        .attr("d", line)
-                      //   .attr("transform", null)
-                      // .transition()
-                      //   .ease("linear")
-                        .attr("transform", "translate(" + x(0) + ",0)");
+                for (var i = 0; i < paths.length; i++) {
+                  datas[i].push(stream.data[i]);
+                  // redraw the line, and slide it to the left
+                  paths[i]
+                      .attr("d", line)
+                    //   .attr("transform", null)
+                    // .transition()
+                    //   .ease("linear")
+                      .attr("transform", "translate(" + x(0) + ",0)");
 
-                    // pop the old data point off the front
-                    datas[i].shift();
+                  // pop the old data point off the front
+                  datas[i].shift();
 
-                    if (d3.min(datas[i]) < min || !min) {
-                      min = d3.min(datas[i]);
-                    }
-
-                    if (d3.max(datas[i]) > max || !max) {
-                      max = d3.max(datas[i]);
-                    }
-
+                  if (d3.min(datas[i]) < min || !min) {
+                    min = d3.min(datas[i]);
                   }
 
-                  y.domain([min, max]);
+                  if (d3.max(datas[i]) > max || !max) {
+                    max = d3.max(datas[i]);
+                  }
 
-                  axis.call(y.axis);
-
-                  
                 }
 
-  
-  });
+                y.domain([min, max]);
+
+                axis.call(y.axis);
+              }
+          });
        }
    };
 });
