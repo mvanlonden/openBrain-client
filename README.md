@@ -1,7 +1,7 @@
 #TO DO
 ## Frontend
 ### Build analyze interface
-![alt text](https://dl.dropboxusercontent.com/s/szs397ibceuz1xh/2015-02-22%2001.07.13.jpg "Interface Sketch")
+![alt text](https://raw.githubusercontent.com/mvanlonden/openBrain-client/master/docs/images/2015-02-22%2001.07.13.jpg "Interface Sketch")
 - Application list is not shown but could resemble session list
 - Should link to exsisting menu
 
@@ -91,10 +91,11 @@ returns sessions for logged in user
     'dental'
   ]
 }
+```
 
 - /session/:sessionId/channels
 - /session/:sessionId/annotations
 - /session/?tags=:tag
 
 ### Ontology
-![alt text](https://dl.dropboxusercontent.com/s/6xh90y38c6031c7/2015-02-22%2001.07.08.jpg "Ontology")
+![alt text](https://raw.githubusercontent.com/mvanlonden/openBrain-client/master/docs/images/2015-02-22%2001.07.08.jpg "Ontology")
