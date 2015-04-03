@@ -9,6 +9,8 @@
 
 ### Test components are linked to endpoints
 
+### Add inline documentation
+
 
 ## Backend
 ### Persistence
