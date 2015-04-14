@@ -25,13 +25,13 @@ angular.module('openBrain')
     // }, 2000);
 
     //Trying OSC to see if reduced latency
-    var oscPort = new osc.WebSocketPort({
-        url: "ws://localhost:12345/openbci" // URL to your Web Socket server.
-    });
+    // var oscPort = new osc.WebSocketPort({
+    //     url: "ws://localhost:12345/openbci" // URL to your Web Socket server.
+    // });
 
-    oscPort.on("message", function (oscMsg) {
-        console.log("An OSC message just arrived!", oscMsg);
-    });
+    // oscPort.on("message", function (oscMsg) {
+    //     console.log("An OSC message just arrived!", oscMsg);
+    // });
 
     
     $scope.toggleNav = function () {
