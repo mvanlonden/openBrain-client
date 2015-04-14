@@ -2,38 +2,33 @@
 
 angular.module('openBrain')
   .controller('MainCtrl', function ($scope, $mdSidenav, $log, boardService, socket) {
-    // var latency;
-    // var avgLat = 0;
-    // var i = 0;
-    // var stop = false;
-    // setInterval(function() {
+    var latency;
+    var avgLat = 0;
+    var i = 0;
+    var stop = false;
+    setInterval(function() {
 
-    //   if (!stop) {
-    //   var startTime = Date.now();
-    //   socket.emit('ping');
-    //   socket.on('pong', function() {
-    //     latency = Date.now() - startTime;
-    //     console.log(latency);
-    //     i++;
-    //     avgLat =+ latency;
-    //     if (i === 39) {
-    //       stop = true;
-    //       console.log('avg',avgLat/40);
-    //     }
-    //   });
-    //   }
-    // }, 2000);
+      if (!stop) {
+      var startTime = Date.now();
+      socket.emit('ping');
+      socket.on('pong', function() {
+        latency = Date.now() - startTime;
+        console.log(latency);
+        i++;
+        avgLat =+ latency;
+        if (i === 39) {
+          stop = true;
+          console.log('avg',avgLat/40);
+        }
+      });
+      }
+    }, 2000);
 
     //Trying OSC to see if reduced latency
     // var oscPort = new osc.WebSocketPort({
     //     url: "ws://localhost:12345/openbci" // URL to your Web Socket server.
     // });
 
-    // oscPort.on("message", function (oscMsg) {
-    //     console.log("An OSC message just arrived!", oscMsg);
-    // });
-
-    
     $scope.toggleNav = function () {
       $mdSidenav('left').toggle()
                             .then(function(){
